@@ -9,6 +9,10 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     height: 1.2,
   );
+   static TextStyle bodyText = GoogleFonts.poppins(
+    color: AppColors.textPrimary,
+    fontSize: 14,
+  );
   static TextStyle secondaryText = GoogleFonts.poppins(
     color: AppColors.textSecondary,
     fontSize: 14,
