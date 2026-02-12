@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:novindus_feed_app/core/constants/api_constnts.dart';
 
@@ -13,16 +12,12 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
 
   FeedRemoteDataSourceImpl({required this.dioClient});
 
-
   @override
   Future<List<FeedModel>> getMyFeeds({int page = 1}) async {
     try {
       final response = await dioClient.dio.get(
         ApiConstants.myFeed,
-        queryParameters: {
-          'page': page,
-          'count': 10, 
-        },
+        queryParameters: {'page': page, 'count': 10},
       );
       if (response.statusCode == 200) {
         List<dynamic> data;
@@ -39,9 +34,11 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
         throw ServerFailure('Server Error: ${response.statusCode}');
       }
     } on DioException catch (e) {
-      throw e.getFailure();
+      throw ServerFailure(e.getFailure().message);
     } catch (e) {
-      throw ServerFailure(e.toString());
+      throw ServerFailure(
+        'An unexpected error occurred. Please try again later.',
+      );
     }
   }
 }

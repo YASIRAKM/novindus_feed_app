@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:novindus_feed_app/core/constants/app_assets.dart';
 
 class ProfileImageAvatar extends StatelessWidget {
   final String imageUrl;
-  bool isUserImage;
-  ProfileImageAvatar({
+  final bool isUserImage;
+  const ProfileImageAvatar({
     super.key,
     required this.imageUrl,
     this.isUserImage = false,
@@ -16,8 +16,8 @@ class ProfileImageAvatar extends StatelessWidget {
       radius: 20,
       backgroundImage: imageUrl.isEmpty || imageUrl == ''
           ? isUserImage
-              ? AssetImage('assets/images/user_profile.png')
-              : AssetImage('assets/images/post_profile.png')
+                ? AssetImage(AppAssets.userProfileImage)
+                : AssetImage(AppAssets.postProfileImage)
           : NetworkImage(imageUrl),
       onBackgroundImageError: (_, _) {},
       backgroundColor: Colors.grey[800],

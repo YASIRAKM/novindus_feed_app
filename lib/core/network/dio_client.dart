@@ -24,19 +24,19 @@ class DioClient {
           if (token != null) {
             options.headers['Authorization'] = 'Bearer $token';
           }
-          // Log request for debugging
+          
           print('Request: ${options.method} ${options.path}');
           print('Headers: ${options.headers}');
           print('Data: ${options.data}');
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          // Log response
+        
           print('Response: ${response.statusCode} ${response.data}');
           return handler.next(response);
         },
         onError: (DioException e, handler) {
-          // Log error
+         
           final failure = e.getFailure();
           print('Error: ${e.response?.statusCode} ${failure.message}');
           if (e.response != null) {

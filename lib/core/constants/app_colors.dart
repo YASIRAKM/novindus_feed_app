@@ -13,4 +13,5 @@ class AppColors {
   static const Color textFieldBorder = Color(0xFFFFFFFF);
   static const Color success = Colors.green;
   static const Color error = Colors.redAccent;
+  static const Color borderDashed = Color(0xFF5A5A5A);
 }

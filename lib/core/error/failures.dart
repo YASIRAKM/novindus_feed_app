@@ -19,9 +19,9 @@ class NetworkFailure extends Failure {
 
 extension Errror on DioException {
   Failure getFailure() {
-    switch (error) {
+    switch (type) {
       case DioExceptionType.connectionError:
-        return NetworkFailure('Connection Error');
+        return NetworkFailure('Network Connection Error');
       case DioExceptionType.connectionTimeout:
         return NetworkFailure('Connection Timeout');
       case DioExceptionType.sendTimeout:
@@ -29,13 +29,25 @@ extension Errror on DioException {
       case DioExceptionType.receiveTimeout:
         return NetworkFailure('Receive Timeout');
       case DioExceptionType.unknown:
-        return ServerFailure('Server Error');
+        return ServerFailure('Unexpected Error Occurred');
       case DioExceptionType.cancel:
-        return NetworkFailure('Cancel');
+        return NetworkFailure('Request Cancelled');
       case DioExceptionType.badResponse:
-        return ServerFailure('Bad Response');
+        try {
+          if (response?.data != null && response?.data is Map) {
+            final data = response?.data;
+            if (data['message'] != null) {
+              return ServerFailure(data['message']);
+            } else if (data['error'] != null) {
+              return ServerFailure(data['error']);
+            }
+          }
+        } catch (e) {
+          return ServerFailure('Server Error: ${response?.statusCode}');
+        }
+        return ServerFailure('Server Error: ${response?.statusCode}');
       default:
-        return NetworkFailure('Unknown Error');
+        return NetworkFailure('Unknown Network Error');
     }
   }
 }

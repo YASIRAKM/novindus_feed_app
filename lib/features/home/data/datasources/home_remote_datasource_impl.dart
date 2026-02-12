@@ -16,7 +16,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     try {
       final response = await dioClient.dio.get(ApiConstants.categoryList);
       if (response.statusCode == 202) {
-       
         List<dynamic> data;
         if (response.data is Map<String, dynamic> &&
             (response.data as Map<String, dynamic>).containsKey('categories')) {
@@ -31,16 +30,17 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         throw ServerFailure('Server Error: ${response.statusCode}');
       }
     } on DioException catch (e) {
-      throw e.getFailure();
+      throw ServerFailure(e.getFailure().message);
     } catch (e) {
-      throw ServerFailure(e.toString());
+      throw ServerFailure(
+        'An unexpected error occurred. Please try again later.',
+      );
     }
   }
 
   @override
   Future<List<FeedModel>> getFeeds() async {
     try {
-     
       final response = await dioClient.dio.get(ApiConstants.home);
       if (response.statusCode == 202) {
         List<dynamic> data;
@@ -57,9 +57,11 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         throw ServerFailure('Server Error: ${response.statusCode}');
       }
     } on DioException catch (e) {
-      throw e.getFailure();
+      throw ServerFailure(e.getFailure().message);
     } catch (e) {
-      throw ServerFailure(e.toString());
+      throw ServerFailure(
+        'An unexpected error occurred. Please try again later.',
+      );
     }
   }
 }

@@ -23,20 +23,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           final tokenData = data['token'];
           if (tokenData is Map<String, dynamic> &&
               tokenData.containsKey('access')) {
-            return {
-              'access': tokenData['access'],
-            };
+            return {'access': tokenData['access']};
           }
         }
         throw ServerFailure('Invalid response format');
       } else {
-        throw ServerFailure('Server Error: ${response.statusCode}');
+        throw ServerFailure('Server Error: ${response.statusCode}');  
       }
     } on DioException catch (e) {
-      throw e.getFailure();
+      throw ServerFailure(e.getFailure().message);
     } catch (e) {
-      throw ServerFailure(e.toString());
+      throw ServerFailure(
+        'An unexpected error occurred. Please try again later.',
+      );
     }
   }
-
 }

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:novindus_feed_app/core/common_widget/error_view.dart';
+import 'package:novindus_feed_app/core/common_widget/loading_view.dart';
+import 'package:novindus_feed_app/core/common_widget/no_data_view.dart';
+import 'package:novindus_feed_app/features/home/presentation/pages/home_screen.dart';
 import 'package:novindus_feed_app/features/home/presentation/widgets/feed_card_widget.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -67,22 +71,13 @@ class _MyFeedsScreenState extends State<MyFeedsScreen> {
       body: Consumer<FeedProvider>(
         builder: (context, provider, child) {
           if (provider.status == FeedStatus.loading) {
-            return const Center(
-              child: CircularProgressIndicator(color: AppColors.redColor),
-            );
+            return LoadingWidget();
           } else if (provider.status == FeedStatus.error) {
-            return Center(
-              child: Text(
-                provider.errorMessage ?? 'Unknown Error',
-                style: AppTextStyles.bodyText,
-              ),
-            );
+            return ErrorViewWidget(errorMessage: provider.errorMessage!);
           } else if (provider.status == FeedStatus.loaded ||
               provider.status == FeedStatus.success) {
             if (provider.myFeeds.isEmpty) {
-              return Center(
-                child: Text('No feeds found', style: AppTextStyles.bodyText),
-              );
+              return NoDataWidget();
             }
             return ListView.separated(
               separatorBuilder: (context, index) {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:novindus_feed_app/core/common_widget/profile_image.dart';
 import 'package:novindus_feed_app/core/constants/app_colors.dart';
 import 'package:novindus_feed_app/core/constants/app_text_styles.dart';
+import 'package:novindus_feed_app/core/constants/app_assets.dart';
+import 'package:novindus_feed_app/core/routes/routes.dart';
 
 class ProfileDataWidget extends StatelessWidget {
   const ProfileDataWidget({super.key});
@@ -33,9 +35,12 @@ class ProfileDataWidget extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/my_feeds');
+              Navigator.pushNamed(context, Routes.myFeeds);
             },
-            child: ProfileImageAvatar(imageUrl: "", isUserImage: true),
+            child: ProfileImageAvatar(
+              imageUrl: "",
+              isUserImage: true,
+            ),
           ),
         ],
       ),

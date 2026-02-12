@@ -1,6 +1,11 @@
 import 'package:get_it/get_it.dart';
 
 import 'package:novindus_feed_app/core/network/dio_client.dart';
+import 'package:novindus_feed_app/features/add_feed/data/datasources/add_feed_remote_datasource.dart';
+import 'package:novindus_feed_app/features/add_feed/data/datasources/add_feed_remote_datasource_impl.dart';
+import 'package:novindus_feed_app/features/add_feed/domain/repositories/add_feed_repository.dart';
+import 'package:novindus_feed_app/features/add_feed/domain/repositories/add_feed_repository_impl.dart';
+import 'package:novindus_feed_app/features/add_feed/presentation/providers/add_feed_provider.dart';
 import 'package:novindus_feed_app/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:novindus_feed_app/features/auth/data/datasources/auth_remote_datasource_impl.dart';
 import 'package:novindus_feed_app/features/auth/domain/repositories/auth_repository.dart';
@@ -36,16 +41,26 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(dioClient: sl()),
   );
- sl.registerFactory(
+  sl.registerFactory(
+    () => AddFeedProvider(addFeedRepository: sl(), homeRepository: sl()),
+  );
+
+  sl.registerLazySingleton<AddFeedRepository>(
+    () => AddFeedRepositoryImpl(remoteDataSource: sl()),
+  );
+
+  sl.registerLazySingleton<AddFeedRemoteDataSource>(
+    () => AddFeedRemoteDataSourceImpl(dioClient: sl()),
+  );
+
+  sl.registerFactory(
     () => FeedProvider(feedRepository: sl(), homeRepository: sl()),
   );
 
-  
   sl.registerLazySingleton<FeedRepository>(
     () => FeedRepositoryImpl(remoteDataSource: sl()),
   );
 
-  
   sl.registerLazySingleton<FeedRemoteDataSource>(
     () => FeedRemoteDataSourceImpl(dioClient: sl()),
   );

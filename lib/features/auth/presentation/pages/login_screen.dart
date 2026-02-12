@@ -3,6 +3,7 @@ import 'package:novindus_feed_app/core/constants/app_colors.dart';
 import 'package:novindus_feed_app/core/constants/app_text_styles.dart';
 import 'package:novindus_feed_app/core/utils/snack_bar_utils.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/routes/routes.dart';
 
 import '../providers/auth_provider.dart';
 import '../widgets/phone_input_widget.dart';
@@ -71,8 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             phone: _phoneController.text,
                           );
                           if (success && context.mounted) {
-                            Navigator.pushReplacementNamed(context, '/home');
-                            SnackbarUtils.showSuccess('Login Successful');
+                            Navigator.pushReplacementNamed(
+                              context,
+                              Routes.home,
+                            );
+
                             authProvider.reset();
                           } else if (context.mounted &&
                               authProvider.errorMessage != null) {
