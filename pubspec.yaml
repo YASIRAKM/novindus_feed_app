@@ -38,6 +38,7 @@ dependencies:
   dio: ^5.9.1
   shared_preferences: ^2.5.4
   get_it: ^9.2.0
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
