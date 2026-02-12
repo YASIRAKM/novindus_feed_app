@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        // Separator logic
+                       
                         if (index.isOdd) {
                           return Container(
                             height: 12,
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }
 
-                        // Item logic
+                      
                         final feedIndex = index ~/ 2;
                         final feed = provider.feeds[feedIndex];
                         return FeedCardWidget(
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         );
                       },
-                      // Count: Items + Separators (Items - 1) => 2 * Items - 1
+                      
                       childCount: provider.feeds.length * 2 - 1,
                     ),
                   );
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
 
-            // Bottom padding for FAB
+         
             const SliverToBoxAdapter(child: SizedBox(height: 80)),
           ],
         ),

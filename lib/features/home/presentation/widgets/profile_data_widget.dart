@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:novindus_feed_app/core/common_widget/profile_image.dart';
 import 'package:novindus_feed_app/core/constants/app_colors.dart';
 import 'package:novindus_feed_app/core/constants/app_text_styles.dart';
-
 
 class ProfileDataWidget extends StatelessWidget {
   const ProfileDataWidget({super.key});

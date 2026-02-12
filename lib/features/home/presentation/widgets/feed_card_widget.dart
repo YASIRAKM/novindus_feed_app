@@ -90,7 +90,7 @@ class _FeedCardWidgetState extends State<FeedCardWidget> {
             ),
           ),
 
-          // Video Player / Thumbnail
+        
           GestureDetector(
             onTap: _togglePlay,
             child: SizedBox(
@@ -126,7 +126,7 @@ class _FeedCardWidgetState extends State<FeedCardWidget> {
                             ),
                           ),
                         ),
-                        // Play Button Overlay
+                        
                         Container(
                           width: 48,
                           height: 48,
@@ -146,7 +146,7 @@ class _FeedCardWidgetState extends State<FeedCardWidget> {
             ),
           ),
 
-          // Description
+          
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ValueListenableBuilder<bool>(

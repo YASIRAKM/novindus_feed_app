@@ -13,6 +13,11 @@ class AppTextStyles {
     color: AppColors.textPrimary,
     fontSize: 14,
   );
+
+   static TextStyle appBarTitle = GoogleFonts.poppins(
+    color: AppColors.textPrimary,
+    fontWeight: FontWeight.w400,
+  );
   static TextStyle secondaryText = GoogleFonts.poppins(
     color: AppColors.textSecondary,
     fontSize: 14,
